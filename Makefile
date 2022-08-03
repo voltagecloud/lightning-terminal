@@ -101,7 +101,7 @@ $(GOACC_BIN):
 
 yarn-install:
 	@$(call print, "Installing app dependencies with yarn")
-	cd app; yarn
+	cd app; yarn --network-timeout 100000
 
 # ============
 # INSTALLATION
