@@ -61,7 +61,7 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lnd/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/ ${{ env.RELEASE_VERSION }}/lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
 
   arm:
     name: Arm release build
@@ -94,7 +94,7 @@ jobs:
         run: SKIP_VERSION_CHECK=1 GOOS=linux GOARCH=arm64 make install tag=${{ env.RELEASE_VERSION }} tags="experimental monitoring autopilotrpc chainrpc invoicesrpc routerrpc signrpc walletrpc watchtowerrpc wtclientrpc neutrinorpc peersrpc"
 
       - name: Archive Build
-        run: mkdir lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/linux_arm64/litdlightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litd&& cp ~/go/bin/linux_arm64/litcli lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} 
+        run: mkdir lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/linux_arm64/litd lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litd && cp ~/go/bin/linux_arm64/litcli lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} 
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lnd/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/ ${{ env.RELEASE_VERSION }}/lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
 
   darwin:
     name: Darwin release build
@@ -138,7 +138,7 @@ jobs:
         run: SKIP_VERSION_CHECK=1 GOOS=darwin GOARCH=arm64 make install tag=${{ env.RELEASE_VERSION }} tags="experimental monitoring autopilotrpc chainrpc invoicesrpc routerrpc signrpc walletrpc watchtowerrpc wtclientrpc neutrinorpc peersrpc"
 
       - name: Archive Build
-        run: mkdir lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/darwin_arm64/litdlightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litd&& cp ~/go/bin/darwin_arm64/litcli lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} 
+        run: mkdir lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/darwin_arm64/litd lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litd && cp ~/go/bin/darwin_arm64/litcli lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} 
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -149,4 +149,4 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lnd/${{ env.RELEASE_VERSION }}/lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/ ${{ env.RELEASE_VERSION }}/lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
