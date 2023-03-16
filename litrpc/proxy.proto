@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package litrpc;
+
+option go_package = "github.com/lightninglabs/lightning-terminal/litrpc";
+
+service Proxy {
+    rpc Ping (PingRequest) returns (PingResponse);
+    rpc StopDaemon (StopDaemonRequest) returns (StopDaemonResponse);
+}
+
+message StopDaemonRequest {
+}
+
+message StopDaemonResponse {
+}
+
+message PingRequest {
+}
+
+message PingResponse {
+}
