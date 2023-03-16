@@ -1,0 +1,152 @@
+name: Release build
+
+on:
+  push:
+    tags:
+      - 'v*-alpha*'
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  # If you change this value, please change it in the following files as well:
+  # /.travis.yml
+  # /Dockerfile
+  # /dev.Dockerfile
+  # /make/builder.Dockerfile
+  # /.github/workflows/main.yml
+  GO_VERSION: 1.18.2
+
+jobs:
+  amd:
+    name: Amd release build
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: git checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: setup go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: '${{ env.GO_VERSION }}'
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Create Build of AMD
+        run: SKIP_VERSION_CHECK=1 GOOS=linux GOARCH=amd64 make install tag=${{ env.RELEASE_VERSION }} tags="experimental monitoring autopilotrpc chainrpc invoicesrpc routerrpc signrpc walletrpc watchtowerrpc wtclientrpc neutrinorpc peersrpc"
+
+      - name: Archive Build
+        run: mkdir lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/litd lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}/litd && cp ~/go/bin/litcli lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }} 
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_KEY }}
+          aws-region: us-west-2
+
+      - name: Upload build to S3
+        run: |
+          aws s3 cp lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+
+  arm:
+    name: Arm release build
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+            
+      - name: git checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: setup go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: '${{ env.GO_VERSION }}'
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Create Build of ARM
+        run: SKIP_VERSION_CHECK=1 GOOS=linux GOARCH=arm64 make install tag=${{ env.RELEASE_VERSION }} tags="experimental monitoring autopilotrpc chainrpc invoicesrpc routerrpc signrpc walletrpc watchtowerrpc wtclientrpc neutrinorpc peersrpc"
+
+      - name: Archive Build
+        run: mkdir lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/linux_arm64/litd lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litd && cp ~/go/bin/linux_arm64/litcli lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }} 
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_KEY }}
+          aws-region: us-west-2
+
+      - name: Upload build to S3
+        run: |
+          aws s3 cp lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+
+  darwin:
+    name: Darwin release build
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+            
+      - name: git checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: setup go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: '${{ env.GO_VERSION }}'
+
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+
+      - name: Create Build of Darwin
+        run: SKIP_VERSION_CHECK=1 GOOS=darwin GOARCH=arm64 make install tag=${{ env.RELEASE_VERSION }} tags="experimental monitoring autopilotrpc chainrpc invoicesrpc routerrpc signrpc walletrpc watchtowerrpc wtclientrpc neutrinorpc peersrpc"
+
+      - name: Archive Build
+        run: mkdir lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} && cp ~/go/bin/darwin_arm64/litd lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litd && cp ~/go/bin/darwin_arm64/litcli lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}/litcli && tar -zcvf lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }} 
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_S3_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_S3_SECRET_KEY }}
+          aws-region: us-west-2
+
+      - name: Upload build to S3
+        run: |
+          aws s3 cp lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
