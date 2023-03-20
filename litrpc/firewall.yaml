@@ -1,0 +1,11 @@
+type: google.api.Service
+config_version: 3
+
+http:
+  rules:
+
+    # firewall.proto
+    - selector: litrpc.Firewall.ListActions
+      get: "/v1/firewall/actions"
+    - selector: litrpc.Firewall.PrivacyMapConversion
+      get: "/v1/firewall/privacy_map/convert"
