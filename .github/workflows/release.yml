@@ -61,7 +61,7 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-amd64-${{ env.RELEASE_VERSION }}.tar.gz
 
   arm:
     name: Arm release build
@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-linux-arm64-${{ env.RELEASE_VERSION }}.tar.gz
 
   darwin:
     name: Darwin release build
@@ -149,4 +149,4 @@ jobs:
 
       - name: Upload build to S3
         run: |
-          aws s3 cp lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz --acl=public-read
+          aws s3 cp lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz s3://lnd-prod-artifacts/builds/lightning-terminal/${{ env.RELEASE_VERSION }}/lightning-terminal-darwin-arm64-${{ env.RELEASE_VERSION }}.tar.gz
