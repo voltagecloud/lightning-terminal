@@ -10,7 +10,7 @@ linux-armv7 \
 linux-arm64 \
 windows-amd64
 
-LND_RELEASE_TAGS = litd autopilotrpc signrpc walletrpc chainrpc invoicesrpc watchtowerrpc neutrinorpc peersrpc
+LND_RELEASE_TAGS = litd autopilotrpc signrpc walletrpc chainrpc invoicesrpc watchtowerrpc neutrinorpc peersrpc kvdb_postgres
 
 # By default we will build all systems. But with the 'sys' tag, a specific
 # system can be specified. This is useful to release for a subset of
