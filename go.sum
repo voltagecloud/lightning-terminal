@@ -406,6 +406,8 @@ github.com/NebulousLabs/go-upnp v0.0.0-20180202185039-29b680b06c82/go.mod h1:Gbu
 github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 h1:TngWCqHvy9oXAN6lEVMRuU21PR1EtLVZJmdB18Gu3Rw=
 github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5/go.mod h1:lmUJ/7eu/Q8D7ML55dXQrVaamCz2vxCfdQBasLZfHKk=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
+github.com/ViktorTigerstrom/lnd v0.0.0-20231220005802-43851afa5f70 h1:BtDb11AIStAeDQCauieU9sUp9aBozCCRierKqxbcl9E=
+github.com/ViktorTigerstrom/lnd v0.0.0-20231220005802-43851afa5f70/go.mod h1:zKLs8Rb+jhXML7R9juPPNm6rjnINJ7Ry3haoM6jQeWo=
 github.com/Yawning/aez v0.0.0-20211027044916-e49e68abd344 h1:cDVUiFo+npB0ZASqnw4q90ylaVAbnYyx0JYqK4YcGok=
 github.com/Yawning/aez v0.0.0-20211027044916-e49e68abd344/go.mod h1:9pIqrY6SXNL8vjRQE5Hd/OL5GyK/9MrGUWs87z/eFfk=
 github.com/aead/chacha20 v0.0.0-20180709150244-8b13a72661da h1:KjTM2ks9d14ZYCvmHS9iAKVt9AyzRSqNU1qabPih5BY=
@@ -957,8 +959,6 @@ github.com/lightninglabs/taproot-assets v0.3.2 h1:98edA51OCqjSN+t59nMA77YtgD8rfB
 github.com/lightninglabs/taproot-assets v0.3.2/go.mod h1:obkMZ4yBOZ1WzlQIa7yqDpcQ58BJhjul7e54po3sloQ=
 github.com/lightningnetwork/lightning-onion v1.2.1-0.20230823005744-06182b1d7d2f h1:Pua7+5TcFEJXIIZ1I2YAUapmbcttmLj4TTi786bIi3s=
 github.com/lightningnetwork/lightning-onion v1.2.1-0.20230823005744-06182b1d7d2f/go.mod h1:c0kvRShutpj3l6B9WtTsNTBUtjSmjZXbJd9ZBRQOSKI=
-github.com/lightningnetwork/lnd v0.17.3-beta h1:RB0bHq55SV1K5/tQxVCvkR+cwfIt38va5922qXTZ8KA=
-github.com/lightningnetwork/lnd v0.17.3-beta/go.mod h1:zKLs8Rb+jhXML7R9juPPNm6rjnINJ7Ry3haoM6jQeWo=
 github.com/lightningnetwork/lnd/cert v1.2.2 h1:71YK6hogeJtxSxw2teq3eGeuy4rHGKcFf0d0Uy4qBjI=
 github.com/lightningnetwork/lnd/cert v1.2.2/go.mod h1:jQmFn/Ez4zhDgq2hnYSw8r35bqGVxViXhX6Cd7HXM6U=
 github.com/lightningnetwork/lnd/clock v1.0.1/go.mod h1:KnQudQ6w0IAMZi1SgvecLZQZ43ra2vpDNj7H/aasemg=
